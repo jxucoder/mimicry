@@ -9,6 +9,8 @@ description = "Rewrite AI drafts in your own voice with a bounded TypeSafe feedb
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "starlette>=1.0,<2",
+    "uvicorn>=0.30,<1",
     "httpx>=0.28,<1",
     "marimo>=0.24,<1",
     "twitter-text-parser>=3,<4",
@@ -21,6 +23,7 @@ dev = ["pytest>=8,<10", "ruff>=0.12,<1"]
 
 [project.scripts]
 mimicry = "mimicry.cli:main"
+mimicry-web = "mimicry.server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/mimicry"]

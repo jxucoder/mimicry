@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mimicry · Write where you are</title>
+  <link rel="stylesheet" href="/inline-assets/demo.css">
+  <script src="/inline-assets/core.js" defer></script><script src="/inline-assets/composer.js" defer></script>
+  <script src="/inline-assets/demo.js" defer></script>
+</head>
+<body>
+  <header><a class="brand" href="/">mimicry<span>.</span></a><span class="preview-label">INLINE WRITING PREVIEW</span><a href="/">Open studio</a></header>
+  <main>
+    <aside class="intro">
+      <span class="eyebrow">RIGHT WHERE YOU WRITE</span>
+      <h1>Your words.<br>A little more you.</h1>
+      <p>A personal writing assistant that lives beside your draft. No switching tabs. No copy-and-paste routine.</p>
+      <ol><li>Write your thought.</li><li>Click Mimicry to check your draft.</li><li>Click an underline. Accept or dismiss each edit.</li></ol>
+      <div class="demo-note"><strong>A place to try the interaction.</strong><p>These are fictional posts and writing samples. Checks use the live Luna + TypeSafe backend. Nothing here can publish to X.</p></div>
+      <button id="voice-settings">Edit example voice</button>
+      <button id="theme-toggle" aria-pressed="false">Dark card preview</button>
+    </aside>
+    <section class="timeline" aria-label="Writing playground">
+      <div class="timeline-header"><h2>Your writing space</h2><span>Preview</span></div>
+      <div class="tabs"><span>For you</span><span>Following</span></div>
+      <section class="compose"><div class="avatar" aria-hidden="true">J</div><div class="compose-main">
+        <label for="demo-draft">What's your take?</label>
+        <div id="demo-draft" class="editor" role="textbox" aria-label="Your post draft" aria-multiline="true" contenteditable="true" data-testid="tweetTextarea_0">I just wanted to say that the office coffee machine is broken. Repairs will take three days. The company will provide instant coffee. To recap, the repair period is three days.</div>
+        <div class="compose-footer"><span>Your draft stays here.</span><button disabled>Post</button></div>
+      </div></section>
+      <article class="post"><div class="avatar sage" aria-hidden="true">M</div><div><strong>Mimicry</strong> <span class="handle">@mimicry_demo · Fictional</span><p>Clearer writing is useful. Still sounding like yourself is the part worth keeping.</p><div class="post-meta">Reply &nbsp; · &nbsp; Repost &nbsp; · &nbsp; Like</div></div></article>
+      <section class="compose reply"><div class="avatar" aria-hidden="true">J</div><div class="compose-main"><label for="reply-draft">A separate reply</label>
+        <div id="reply-draft" class="editor" role="textbox" aria-label="Your reply draft" aria-multiline="true" contenteditable="true" data-testid="tweetTextarea_1">I want AI to help me say what I mean without giving me someone else's personality.</div>
+        <div class="compose-footer"><span>Each writing box keeps its own suggestion.</span><button disabled>Reply</button></div>
+      </div></section>
+    </section>
+  </main>
+  <dialog id="sample-dialog" aria-labelledby="sample-title"><div class="dialog-heading"><h2 id="sample-title">Your example voice</h2><button id="save-voice">Done</button></div><p>Fictional builder tweets, editable for this preview.</p><label for="sample-text">Writing samples</label><textarea id="sample-text" rows="10"></textarea><p id="sample-status" role="status"></p></dialog>
+</body>
+</html>

@@ -319,7 +319,9 @@ dependencies = [
     { name = "httpx" },
     { name = "marimo" },
     { name = "setuptools" },
+    { name = "starlette" },
     { name = "twitter-text-parser" },
+    { name = "uvicorn" },
 ]
 
 [package.optional-dependencies]
@@ -335,7 +337,9 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8,<10" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.12,<1" },
     { name = "setuptools", specifier = ">=80,<82" },
+    { name = "starlette", specifier = ">=1.0,<2" },
     { name = "twitter-text-parser", specifier = ">=3,<4" },
+    { name = "uvicorn", specifier = ">=0.30,<1" },
 ]
 provides-extras = ["dev"]
 

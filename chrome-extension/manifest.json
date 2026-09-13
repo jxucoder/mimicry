@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "Mimicry \u2014 Your voice on X",
+  "version": "0.3.3",
+  "description": "Your personal writing assistant, right inside X. Review a suggestion, see edits, and apply it to your draft.",
+  "minimum_chrome_version": "116",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzD/kqwGolWJSU01x14EHqs+RbaK8BDT8aHYQUus9EdkO+rsD9fcCguOIwzBcO9bijY6jI9zhaybhlZM0MsucaloUK1w4uyB+AqSenflha48SPmFtSk04jv9IBOp4s4R9PrKrYhIAhioq6meQjXgJ+jGtA6NzhdfCVtZ5n5fXngMYuv9qovjxYJjGnAZMc6/Wc1Lw584lUV9pjK9t3s7tvZNs5HgfllejUzkg1mpX3AoQRLixqQ3rvGPSBahGjRnuPUrmfQuDB5fcNXgfifD5+YbsZcPizf3yRYi9zYaBeCSfHb2KxO+WPSX+tgLQ0X5//hRABrXtPEQ9QQAruJs4DwIDAQAB",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "sidePanel",
+    "storage",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1/*"
+  ],
+  "action": {
+    "default_title": "Mimicry writing assistant"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; connect-src http://127.0.0.1:2719; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://x.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false,
+      "world": "ISOLATED"
+    }
+  ]
+}

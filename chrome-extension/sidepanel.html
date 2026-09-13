@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mimicry · A thought, in your voice</title>
+  <link rel="stylesheet" href="assets/app.css">
+  <script src="extension-bridge.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#draft">Skip to writing</a>
+  <header class="topbar">
+    <a class="brand" href="sidepanel.html">mimicry<span>.</span></a>
+    <span class="tagline">Your point. Your voice.</span>
+    <div class="account">
+      <button id="open-voice" class="voice-button"><span class="status-dot" aria-hidden="true"></span>My voice<span id="voice-ready">Set up</span></button>
+      <span id="account-label">Local studio</span>
+      <button id="connect" class="quiet" disabled>Connect X</button>
+      <button id="logout" class="text-button" hidden>Sign out</button>
+    </div>
+  </header>
+  <p id="notice" class="notice global-notice" role="status" hidden></p>
+  <main class="workspace">
+    <section id="feed-pane" class="feed-pane" aria-labelledby="feed-heading">
+      <div class="pane-heading">
+        <div><span class="eyebrow">Start with a conversation</span><h1 id="feed-heading">Your X timeline</h1></div>
+        <a class="external-link" href="https://x.com/home" target="_blank" rel="noreferrer">Open X <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="feed-toolbar"><span>Following <span class="subtle">· chronological</span></span>
+        <button id="load-feed" class="text-button" hidden>Refresh</button></div>
+      <p id="feed-status" class="helper feed-message" role="status">Connect X to load posts from your home timeline.</p>
+      <div id="feed" class="feed-list"></div>
+      <div id="feed-empty" class="feed-empty">
+        <div class="empty-mark" aria-hidden="true">↗</div>
+        <h2>Something worth responding to.</h2>
+        <p>Browse your timeline, pick a post, and say what you think. Mimicry helps with the words.</p>
+        <button id="feed-connect" class="primary">Connect your X account</button>
+        <button id="paste-context" class="text-button">Or paste a post as context</button>
+      </div>
+    </section>
+    <section class="editor-pane" aria-labelledby="editor-heading">
+      <div class="pane-heading editor-heading">
+        <div><span class="eyebrow">The thought is yours</span><h2 id="editor-heading">Make it sound like you.</h2></div>
+        <button id="example" class="text-button">Try an example</button>
+      </div>
+      <ol class="workflow" aria-label="Writing workflow">
+        <li id="flow-thought" class="active"><span>1</span>Your thought</li>
+        <li id="flow-rewrite"><span>2</span>AI rewrite</li>
+        <li id="flow-voice"><span>3</span>Your voice</li>
+      </ol>
+      <section class="thought-section">
+        <label for="writing-mode">Writing mode</label>
+        <select id="writing-mode"><option value="refine_personalize">AI refine + Personalize</option><option value="personalize">Personalize only</option><option value="refine">AI refine only</option></select>
+        <div id="context-box" class="context" hidden>
+          <div class="section-heading"><span class="eyebrow">In response to</span>
+            <button id="clear-context" class="text-button">Remove</button></div>
+          <p id="context-text"></p>
+        </div>
+        <label for="draft">What's your take?</label>
+        <textarea id="draft" rows="5" maxlength="12000" aria-describedby="draft-help" placeholder="I think… because… Messy notes are welcome. Keep the opinion yours."></textarea>
+        <p id="draft-help" class="helper">Your opinion, reasoning, and level of certainty stay yours.</p>
+        <div class="compose-actions">
+          <div><label class="sr-only" for="format">Output format</label>
+            <select id="format"><option value="tweet">Single tweet</option><option value="text">General writing</option></select></div>
+          <button id="rewrite" class="primary" disabled>Rewrite &amp; make it mine <span aria-hidden="true">↗</span></button>
+        </div>
+        <p id="form-error" class="notice error" role="alert" hidden></p>
+        <p class="privacy-note">Your selected text goes to OpenAI and TypeSafe when you submit. Nothing is posted to X.</p>
+      </section>
+      <section id="result-panel" class="result-panel" aria-label="Your writing versions">
+        <div class="result-meta" id="result-meta" hidden><span id="run-status" class="badge"></span><p id="progress" role="status" aria-live="polite"></p></div>
+        <p id="result-note" class="helper" hidden></p>
+        <div class="output-card ai-card">
+          <div class="output-heading"><h3><span class="step-number">02</span>AI rewrite</h3><span class="output-kind">Clearer expression</span></div>
+          <p id="ai-output" class="output-text placeholder">Your idea, organized into a clear draft.</p>
+        </div>
+        <div class="stage-connector" aria-hidden="true"><span>↓</span><span>Your writing samples + TypeSafe feedback</span></div>
+        <div class="output-card voice-card">
+          <div class="output-heading"><h3><span class="step-number" id="final-number">03</span><span id="final-heading">In your voice</span></h3><span id="final-status" class="output-kind">Personalized to you</span></div>
+          <div id="kept"><p class="output-text placeholder">Your rhythm, word choice, and personality. Same point.</p></div>
+        </div>
+        <details id="loop-details" class="loop-details" hidden>
+          <summary>See edits &amp; how the loop decided</summary>
+          <p class="helper">Luna rewrites. TypeSafe checks the criteria for your selected mode. Code accepts or rejects each edit.</p>
+          <div id="steps" class="steps"></div><div id="versions"></div>
+          <details id="raw-details"><summary>Full run details</summary><pre id="raw-result"></pre></details>
+        </details>
+      </section>
+    </section>
+  </main>
+  <dialog id="voice-dialog" aria-labelledby="voice-heading">
+    <div class="dialog-heading"><div><span class="eyebrow">Personal, by example</span><h2 id="voice-heading">Teach it your voice.</h2></div><button id="close-voice" class="quiet">Done</button></div>
+    <p class="muted">Choose things you wrote yourself and still like. These examples guide the style, not the opinion.</p>
+    <div class="section-heading"><h3>Your past tweets</h3><button id="load-posts" class="text-button" hidden>Refresh tweets</button></div>
+    <p id="posts-status" class="helper" role="status">Connect X to see your own tweets, or paste your writing below.</p>
+    <div id="posts" class="post-list"></div>
+    <label for="references">Your writing samples</label>
+    <textarea id="references" rows="7" maxlength="12000" aria-describedby="reference-help" placeholder="Paste a few things you wrote yourself. Short tweets can be combined."></textarea>
+    <p id="reference-help" class="helper" role="status">Use 80–12,000 characters of your own writing.</p>
+    <details class="criteria-panel"><summary>What TypeSafe evaluates</summary>
+      <p class="helper">Your samples supply the style. The evaluation questions are fixed; scores are model judgments, not probabilities of authorship.</p>
+      <div id="criteria"></div>
+    </details>
+  </dialog>
+  <dialog id="context-dialog" aria-labelledby="context-heading">
+    <div class="dialog-heading"><h2 id="context-heading">What are you responding to?</h2><button id="close-context" class="quiet">Cancel</button></div>
+    <label for="pasted-context">Post text</label><textarea id="pasted-context" rows="7" maxlength="12000" placeholder="Paste the post you want to respond to."></textarea>
+    <p class="helper">This is context from someone else. Write your own opinion in the next step.</p>
+    <button id="use-context" class="primary">Use as context</button>
+  </dialog>
+</body>
+</html>
