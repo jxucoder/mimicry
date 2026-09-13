@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mimicry"
+version = "0.1.0"
+description = "Rewrite AI drafts in your own voice with a bounded TypeSafe feedback loop."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "httpx>=0.28,<1",
+    "marimo>=0.24,<1",
+    "twitter-text-parser>=3,<4",
+    # twitter-text-parser 3.0 loads emoji data through pkg_resources.
+    "setuptools>=80,<82",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.12,<1"]
+
+[project.scripts]
+mimicry = "mimicry.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mimicry"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

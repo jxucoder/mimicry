@@ -1,0 +1,20 @@
+# Credentials and local data
+.env
+.env.*
+!.env.example
+.private/
+runs/
+wandb/
+
+# Environments, build output, and caches
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+**/__marimo__/
+.DS_Store
